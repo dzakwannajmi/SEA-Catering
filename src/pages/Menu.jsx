@@ -157,6 +157,7 @@ const menuItems = [
 export default function Menu() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [modalItem, setModalItem] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
 
   const categories = [
     "All",
@@ -222,13 +223,7 @@ export default function Menu() {
                     >
                       <ShoppingCart size={18} />
                     </button>
-                    {/* Perubahan di sini: top-[115%] dan max-w-[100px] atau max-w-xs */}
-                    <span
-                      className="absolute left-1/2 -translate-x-1/2 top-[115%] whitespace-nowrap bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10
-                     max-w-[100px] text-center whitespace-normal"
-                    >
-                      {" "}
-                      {/* Tambahkan ini */}
+                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center whitespace-nowrap">
                       Add to Cart
                     </span>
                   </div>
@@ -236,20 +231,13 @@ export default function Menu() {
                   {/* View Details */}
                   <div className="relative group">
                     <button
-                      // Asumsi 'item' didefinisikan di scope ini (misalnya, ini ada di map dari daftar item)
                       onClick={() => setModalItem(item)}
                       className="text-sea hover:text-sea/70 transition"
                     >
                       <Eye size={18} />
                     </button>
-                    {/* Perubahan di sini: top-[115%] dan max-w-[100px] atau max-w-xs */}
-                    <span
-                      className="absolute left-1/2 -translate-x-1/2 top-[115%] whitespace-nowrap bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10
-                     max-w-[100px] text-center whitespace-normal"
-                    >
-                      {" "}
-                      {/* Tambahkan ini */}
-                      View Details Long Text Here
+                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center whitespace-nowrap">
+                      View Details
                     </span>
                   </div>
                 </div>
@@ -261,10 +249,20 @@ export default function Menu() {
 
       {/* Modal Box */}
       {modalItem && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6 relative animate-fadeIn">
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center transition-opacity duration-300">
+          <div
+            className={`bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6 relative ${
+              isClosing ? "animate-fadeOut" : "animate-fadeInUp"
+            }`}
+          >
             <button
-              onClick={() => setModalItem(null)}
+              onClick={() => {
+                setIsClosing(true);
+                setTimeout(() => {
+                  setModalItem(null);
+                  setIsClosing(false);
+                }, 300); // sesuai durasi fadeOut
+              }}
               className="absolute top-2 right-3 text-gray-500 hover:text-sea text-xl"
             >
               ×

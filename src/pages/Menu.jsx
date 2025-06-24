@@ -15,7 +15,26 @@ const menuItems = [
       protein: "35g",
       carbs: "30g",
       fat: "12g",
+      // Contoh data lengkap, meskipun hanya beberapa yang ditampilkan di modal
+      // Anda bisa mengisi ini lebih lanjut sesuai kebutuhan:
+      sodium: "1773mg",
+      fiber: "1g",
+      totalSugar: "0.4g",
+      saturatedFat: "1g",
+      cholesterol: "43mg",
+      vitaminC: "1mg",
+      iron: "1mg",
+      calcium: "15mg",
     },
+    ingredients: [
+      "Chicken breast",
+      "Quinoa",
+      "Broccoli",
+      "Olive oil",
+      "Spices",
+    ], // Contoh
+    allergen: ["None"], // Contoh
+    utensils: ["Pan", "Pot", "Serving Plate"], // Contoh
   },
   {
     id: 2,
@@ -30,7 +49,12 @@ const menuItems = [
       protein: "28g",
       carbs: "12g",
       fat: "24g",
+      sodium: "250mg",
+      fiber: "5g",
     },
+    ingredients: ["Salmon", "Avocado", "Mixed greens", "Lemon", "Olive oil"],
+    allergen: ["Fish"],
+    utensils: ["Bowl", "Fork"],
   },
   {
     id: 3,
@@ -45,7 +69,18 @@ const menuItems = [
       protein: "20g",
       carbs: "55g",
       fat: "14g",
+      sodium: "300mg",
+      fiber: "8g",
     },
+    ingredients: [
+      "Chickpeas",
+      "Sweet potatoes",
+      "Kale",
+      "Brown rice",
+      "Tahini",
+    ],
+    allergen: ["Sesame"],
+    utensils: ["Bowl"],
   },
   {
     id: 4,
@@ -60,7 +95,12 @@ const menuItems = [
       protein: "10g",
       carbs: "45g",
       fat: "8g",
+      sodium: "50mg",
+      fiber: "6g",
     },
+    ingredients: ["Oats", "Almond milk", "Mixed berries", "Chia seeds"],
+    allergen: ["Nuts (Almond)"],
+    utensils: ["Jar", "Spoon"],
   },
   {
     id: 5,
@@ -75,7 +115,19 @@ const menuItems = [
       protein: "18g",
       carbs: "40g",
       fat: "15g",
+      sodium: "400mg",
+      fiber: "4g",
     },
+    ingredients: [
+      "Tofu",
+      "Broccoli",
+      "Carrots",
+      "Bell peppers",
+      "Soy sauce",
+      "Brown rice",
+    ],
+    allergen: ["Soy"],
+    utensils: ["Wok", "Serving bowl"],
   },
   {
     id: 6,
@@ -90,7 +142,12 @@ const menuItems = [
       protein: "36g",
       carbs: "42g",
       fat: "16g",
+      sodium: "500mg",
+      fiber: "3g",
     },
+    ingredients: ["Beef", "Teriyaki sauce", "Broccoli", "Carrots", "Rice"],
+    allergen: ["Soy", "Wheat"],
+    utensils: ["Pan", "Bowl"],
   },
   {
     id: 7,
@@ -105,7 +162,12 @@ const menuItems = [
       protein: "5g",
       carbs: "35g",
       fat: "5g",
+      sodium: "20mg",
+      fiber: "7g",
     },
+    ingredients: ["Spinach", "Banana", "Green apple", "Chia seeds", "Water"],
+    allergen: ["None"],
+    utensils: ["Blender"],
   },
   {
     id: 8,
@@ -120,7 +182,18 @@ const menuItems = [
       protein: "30g",
       carbs: "28g",
       fat: "13g",
+      sodium: "350mg",
+      fiber: "3g",
     },
+    ingredients: [
+      "Shrimp",
+      "Edamame",
+      "Mango",
+      "Rice",
+      "Sesame ginger dressing",
+    ],
+    allergen: ["Shellfish", "Soy", "Sesame"],
+    utensils: ["Bowl"],
   },
   {
     id: 9,
@@ -135,7 +208,12 @@ const menuItems = [
       protein: "25g",
       carbs: "30g",
       fat: "14g",
+      sodium: "450mg",
+      fiber: "5g",
     },
+    ingredients: ["Whole grain wrap", "Turkey", "Avocado", "Lettuce", "Hummus"],
+    allergen: ["Wheat"],
+    utensils: ["None"],
   },
   {
     id: 10,
@@ -150,7 +228,12 @@ const menuItems = [
       protein: "12g",
       carbs: "35g",
       fat: "10g",
+      sodium: "80mg",
+      fiber: "4g",
     },
+    ingredients: ["Greek yogurt", "Granola", "Mixed berries"],
+    allergen: ["Dairy", "Gluten (from granola)"],
+    utensils: ["Glass", "Spoon"],
   },
 ];
 
@@ -212,7 +295,8 @@ export default function Menu() {
                 <span className="font-bold text-lg text-sea">
                   Rp {item.price.toLocaleString()}
                 </span>
-                <div className="flex gap-4 justify-center sm:justify-end">
+                <div className="flex gap-2 items-center">
+                  {/* Add to Cart */}
                   <div className="relative group">
                     <button
                       onClick={() => alert("Added to cart!")}
@@ -220,10 +304,13 @@ export default function Menu() {
                     >
                       <ShoppingCart size={18} />
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center">
-                      Add to Cart
+                    {/* Perubahan di sini: teks "Add" & penyesuaian posisi */}
+                    <span className="absolute left-1/2 -translate-x-1/2 top-full mt-0.5 bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 whitespace-nowrap">
+                      Add
                     </span>
                   </div>
+
+                  {/* View Details */}
                   <div className="relative group">
                     <button
                       onClick={() => setModalItem(item)}
@@ -231,8 +318,9 @@ export default function Menu() {
                     >
                       <Eye size={18} />
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center">
-                      View Details
+                    {/* Perubahan di sini: teks "View" & penyesuaian posisi */}
+                    <span className="absolute left-1/2 -translate-x-1/2 top-full mt-0.5 bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 whitespace-nowrap">
+                      View
                     </span>
                   </div>
                 </div>
@@ -272,13 +360,111 @@ export default function Menu() {
             <p className="text-sm text-gray-700 mb-4">
               {modalItem.description}
             </p>
-            <h3 className="text-md font-bold mb-1">Nutrition Info</h3>
-            <ul className="text-sm text-gray-600 space-y-1">
-              <li>Calories: {modalItem.nutrition.calories} kcal</li>
-              <li>Protein: {modalItem.nutrition.protein}</li>
-              <li>Carbs: {modalItem.nutrition.carbs}</li>
-              <li>Fat: {modalItem.nutrition.fat}</li>
-            </ul>
+            {/* START: Bagian Ingredients, Allergen, Utensils */}
+            <div className="mb-4 border-t border-gray-200 pt-4">
+              {" "}
+              {/* Menambah border top dan padding */}
+              {modalItem.ingredients && modalItem.ingredients.length > 0 && (
+                <>
+                  <h3 className="text-md font-bold mb-1">Ingredients</h3>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {modalItem.ingredients.join(", ")}
+                  </p>
+                </>
+              )}
+              {modalItem.allergen && modalItem.allergen.length > 0 && (
+                <>
+                  <h3 className="text-md font-bold mb-1 mt-2">Allergen Info</h3>{" "}
+                  {/* mt-2 untuk jarak */}
+                  <p className="text-sm text-gray-600 mb-2">
+                    {modalItem.allergen.join(", ")}
+                  </p>
+                </>
+              )}
+              {modalItem.utensils && modalItem.utensils.length > 0 && (
+                <>
+                  <h3 className="text-md font-bold mb-1 mt-2">
+                    Recommended Utensils
+                  </h3>{" "}
+                  {/* mt-2 untuk jarak */}
+                  <p className="text-sm text-gray-600 mb-2">
+                    {modalItem.utensils.join(", ")}
+                  </p>
+                </>
+              )}
+            </div>
+            {/* END: Bagian Ingredients, Allergen, Utensils */}
+            <h3 className="text-md font-bold mb-2 border-t border-gray-200 pt-4 mt-4">
+              Nutrition Info
+            </h3>{" "}
+            {/* Border top dan padding untuk memisahkan */}
+            <div className="text-sm text-gray-700">
+              <div className="flex justify-between mb-1">
+                <span>Calories</span>
+                <span>{modalItem.nutrition.calories} kcal</span>
+              </div>
+              <div className="flex justify-between mb-1">
+                <span>Protein</span>
+                <span>{modalItem.nutrition.protein}</span>
+              </div>
+              <div className="flex justify-between mb-1">
+                <span>Carbs</span>
+                <span>{modalItem.nutrition.carbs}</span>
+              </div>
+              <div className="flex justify-between mb-1">
+                <span>Fat</span>
+                <span>{modalItem.nutrition.fat}</span>
+              </div>
+              {/* Beberapa Detail Tambahan yang Sering Dicari */}
+              {modalItem.nutrition.sodium && (
+                <div className="flex justify-between mb-1">
+                  <span>Sodium</span>
+                  <span>{modalItem.nutrition.sodium}</span>
+                </div>
+              )}
+              {modalItem.nutrition.fiber && (
+                <div className="flex justify-between mb-1">
+                  <span>Fiber</span>
+                  <span>{modalItem.nutrition.fiber}</span>
+                </div>
+              )}
+              {modalItem.nutrition.totalSugar && (
+                <div className="flex justify-between mb-1">
+                  <span>Total Sugar</span>
+                  <span>{modalItem.nutrition.totalSugar}</span>
+                </div>
+              )}
+              {modalItem.nutrition.saturatedFat && (
+                <div className="flex justify-between mb-1">
+                  <span>Saturated Fat</span>
+                  <span>{modalItem.nutrition.saturatedFat}</span>
+                </div>
+              )}
+              {modalItem.nutrition.cholesterol && (
+                <div className="flex justify-between mb-1">
+                  <span>Cholesterol</span>
+                  <span>{modalItem.nutrition.cholesterol}</span>
+                </div>
+              )}
+              {modalItem.nutrition.vitaminC && (
+                <div className="flex justify-between mb-1">
+                  <span>Vitamin C</span>
+                  <span>{modalItem.nutrition.vitaminC}</span>
+                </div>
+              )}
+              {modalItem.nutrition.iron && (
+                <div className="flex justify-between mb-1">
+                  <span>Iron</span>
+                  <span>{modalItem.nutrition.iron}</span>
+                </div>
+              )}
+              {modalItem.nutrition.calcium && (
+                <div className="flex justify-between mb-1">
+                  <span>Calcium</span>
+                  <span>{modalItem.nutrition.calcium}</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

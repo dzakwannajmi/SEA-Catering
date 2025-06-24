@@ -213,19 +213,45 @@ export default function Menu() {
                 <span className="font-bold text-lg text-sea">
                   Rp {item.price.toLocaleString()}
                 </span>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => alert("Added to cart!")}
-                    className="p-2 border border-sea text-sea rounded hover:bg-sea hover:text-white"
-                  >
-                    <ShoppingCart size={16} />
-                  </button>
-                  <button
-                    onClick={() => setModalItem(item)}
-                    className="p-2 border border-sea text-sea rounded hover:bg-sea hover:text-white"
-                  >
-                    <Eye size={16} />
-                  </button>
+                <div className="flex gap-4">
+                  {/* Add to Cart */}
+                  <div className="relative group">
+                    <button
+                      onClick={() => alert("Added to cart!")}
+                      className="text-sea hover:text-sea/70 transition"
+                    >
+                      <ShoppingCart size={18} />
+                    </button>
+                    {/* Perubahan di sini: top-[115%] dan max-w-[100px] atau max-w-xs */}
+                    <span
+                      className="absolute left-1/2 -translate-x-1/2 top-[115%] whitespace-nowrap bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10
+                     max-w-[100px] text-center whitespace-normal"
+                    >
+                      {" "}
+                      {/* Tambahkan ini */}
+                      Add to Cart
+                    </span>
+                  </div>
+
+                  {/* View Details */}
+                  <div className="relative group">
+                    <button
+                      // Asumsi 'item' didefinisikan di scope ini (misalnya, ini ada di map dari daftar item)
+                      onClick={() => setModalItem(item)}
+                      className="text-sea hover:text-sea/70 transition"
+                    >
+                      <Eye size={18} />
+                    </button>
+                    {/* Perubahan di sini: top-[115%] dan max-w-[100px] atau max-w-xs */}
+                    <span
+                      className="absolute left-1/2 -translate-x-1/2 top-[115%] whitespace-nowrap bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10
+                     max-w-[100px] text-center whitespace-normal"
+                    >
+                      {" "}
+                      {/* Tambahkan ini */}
+                      View Details Long Text Here
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

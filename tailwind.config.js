@@ -11,13 +11,19 @@ export default {
           "0%": { opacity: 0, transform: "translateY(10px)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
+        fadeInUp: {
+          "0%": { opacity: 0, transform: "translateY(20px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        fadeOut: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0 },
+        },
       },
       animation: {
         fadeIn: "fadeIn 0.8s ease-out forwards",
-        fadeInDelay100: "fadeIn 0.8s ease-out 0.1s forwards",
-        fadeInDelay200: "fadeIn 0.8s ease-out 0.2s forwards",
-        fadeInDelay300: "fadeIn 0.8s ease-out 0.3s forwards",
-        fadeInDelay400: "fadeIn 0.8s ease-out 0.4s forwards",
+        fadeInUp: "fadeInUp 0.4s ease-out forwards",
+        fadeOut: "fadeOut 0.3s ease-in forwards", // << ini penting
       },
     },
   },

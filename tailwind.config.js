@@ -23,7 +23,7 @@ export default {
       animation: {
         fadeIn: "fadeIn 0.8s ease-out forwards",
         fadeInUp: "fadeInUp 0.4s ease-out forwards",
-        fadeOut: "fadeOut 0.3s ease-in forwards", // << ini penting
+        fadeOut: "fadeOut 0.3s ease-in forwards", 
       },
     },
   },

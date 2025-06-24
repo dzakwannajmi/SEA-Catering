@@ -10,6 +10,12 @@ const menuItems = [
     price: 55000,
     image: "/images/grilled-chicken.jpg",
     category: "High Protein",
+    nutrition: {
+      calories: 420,
+      protein: "35g",
+      carbs: "30g",
+      fat: "12g",
+    },
   },
   {
     id: 2,
@@ -19,6 +25,12 @@ const menuItems = [
     price: 60000,
     image: "/images/salmon-salad.jpg",
     category: "Low Carb",
+    nutrition: {
+      calories: 390,
+      protein: "28g",
+      carbs: "12g",
+      fat: "24g",
+    },
   },
   {
     id: 3,
@@ -28,6 +40,12 @@ const menuItems = [
     price: 50000,
     image: "/images/buddha-bowl.jpg",
     category: "Vegan",
+    nutrition: {
+      calories: 450,
+      protein: "20g",
+      carbs: "55g",
+      fat: "14g",
+    },
   },
   {
     id: 4,
@@ -37,6 +55,12 @@ const menuItems = [
     price: 40000,
     image: "/images/overnight-oats.jpg",
     category: "Breakfast",
+    nutrition: {
+      calories: 350,
+      protein: "10g",
+      carbs: "45g",
+      fat: "8g",
+    },
   },
   {
     id: 5,
@@ -46,6 +70,12 @@ const menuItems = [
     price: 48000,
     image: "/images/tofu-stir-fry.jpg",
     category: "Vegan",
+    nutrition: {
+      calories: 400,
+      protein: "18g",
+      carbs: "40g",
+      fat: "15g",
+    },
   },
   {
     id: 6,
@@ -55,6 +85,12 @@ const menuItems = [
     price: 59000,
     image: "/images/beef-teriyaki.jpg",
     category: "High Protein",
+    nutrition: {
+      calories: 470,
+      protein: "36g",
+      carbs: "42g",
+      fat: "16g",
+    },
   },
   {
     id: 7,
@@ -64,6 +100,12 @@ const menuItems = [
     price: 35000,
     image: "/images/green-smoothie.jpg",
     category: "Drink",
+    nutrition: {
+      calories: 220,
+      protein: "5g",
+      carbs: "35g",
+      fat: "5g",
+    },
   },
   {
     id: 8,
@@ -73,6 +115,12 @@ const menuItems = [
     price: 62000,
     image: "/images/shrimp-poke.jpg",
     category: "Low Carb",
+    nutrition: {
+      calories: 410,
+      protein: "30g",
+      carbs: "28g",
+      fat: "13g",
+    },
   },
   {
     id: 9,
@@ -82,6 +130,12 @@ const menuItems = [
     price: 52000,
     image: "/images/turkey-wrap.jpg",
     category: "Snack",
+    nutrition: {
+      calories: 380,
+      protein: "25g",
+      carbs: "30g",
+      fat: "14g",
+    },
   },
   {
     id: 10,
@@ -91,13 +145,23 @@ const menuItems = [
     price: 42000,
     image: "/images/yogurt-parfait.jpg",
     category: "Breakfast",
+    nutrition: {
+      calories: 300,
+      protein: "12g",
+      carbs: "35g",
+      fat: "10g",
+    },
   },
 ];
 
 export default function Menu() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [modalItem, setModalItem] = useState(null);
 
-  const categories = ["All", ...new Set(menuItems.map((item) => item.category))];
+  const categories = [
+    "All",
+    ...new Set(menuItems.map((item) => item.category)),
+  ];
 
   const filteredItems =
     selectedCategory === "All"
@@ -151,16 +215,16 @@ export default function Menu() {
                 </span>
                 <div className="flex gap-2">
                   <button
-                    title="View Details"
-                    className="p-2 rounded-full bg-sea/10 hover:bg-sea/20 transition"
+                    onClick={() => alert("Added to cart!")}
+                    className="p-2 border border-sea text-sea rounded hover:bg-sea hover:text-white"
                   >
-                    <Eye className="text-sea w-5 h-5" />
+                    <ShoppingCart size={16} />
                   </button>
                   <button
-                    title="Add to Cart"
-                    className="p-2 rounded-full bg-sea/10 hover:bg-sea/20 transition"
+                    onClick={() => setModalItem(item)}
+                    className="p-2 border border-sea text-sea rounded hover:bg-sea hover:text-white"
                   >
-                    <ShoppingCart className="text-sea w-5 h-5" />
+                    <Eye size={16} />
                   </button>
                 </div>
               </div>
@@ -168,6 +232,38 @@ export default function Menu() {
           </div>
         ))}
       </div>
+
+      {/* Modal Box */}
+      {modalItem && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+          <div className="bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6 relative animate-fadeIn">
+            <button
+              onClick={() => setModalItem(null)}
+              className="absolute top-2 right-3 text-gray-500 hover:text-sea text-xl"
+            >
+              ×
+            </button>
+            <h2 className="text-xl font-semibold mb-2 text-sea">
+              {modalItem.name}
+            </h2>
+            <img
+              src={modalItem.image}
+              alt={modalItem.name}
+              className="w-full h-48 object-cover rounded mb-4"
+            />
+            <p className="text-sm text-gray-700 mb-4">
+              {modalItem.description}
+            </p>
+            <h3 className="text-md font-bold mb-1">Nutrition Info</h3>
+            <ul className="text-sm text-gray-600 space-y-1">
+              <li>Calories: {modalItem.nutrition.calories} kcal</li>
+              <li>Protein: {modalItem.nutrition.protein}</li>
+              <li>Carbs: {modalItem.nutrition.carbs}</li>
+              <li>Fat: {modalItem.nutrition.fat}</li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

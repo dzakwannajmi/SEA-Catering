@@ -72,7 +72,7 @@ export default function Home() {
         <Phone className="text-sea w-5 h-5" />
         <div>
           <p className="text-gray-700 font-medium">Contact Our Manager:</p>
-          <p className="text-sea font-semibold">Brian – 08123456789</p>
+          <p className="text-sea font-semibold">Brian - 08123456789</p>
         </div>
       </section>
     </div>

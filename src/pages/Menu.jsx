@@ -170,17 +170,16 @@ export default function Menu() {
       : menuItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold text-sea mb-10 text-center">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-10 sm:py-12">
+      <h1 className="text-3xl sm:text-4xl font-bold text-sea mb-10 text-center">
         Our Menu
       </h1>
 
-      {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-10">
+      <div className="flex flex-wrap justify-center gap-3 mb-10">
         {categories.map((cat) => (
           <button
             key={cat}
-            className={`px-4 py-2 rounded-full border text-sm transition ${
+            className={`px-4 py-2 rounded-full border text-xs sm:text-sm transition ${
               selectedCategory === cat
                 ? "bg-sea text-white border-sea"
                 : "text-sea border-sea hover:bg-sea hover:text-white"
@@ -192,8 +191,7 @@ export default function Menu() {
         ))}
       </div>
 
-      {/* Menu Cards */}
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredItems.map((item) => (
           <div
             key={item.id}
@@ -205,17 +203,16 @@ export default function Menu() {
               className="w-full h-48 object-cover"
             />
             <div className="p-5">
-              <h3 className="text-xl font-semibold text-sea mb-1">
+              <h3 className="text-lg sm:text-xl font-semibold text-sea mb-1">
                 {item.name}
               </h3>
               <p className="text-sm text-gray-600 mb-2">{item.category}</p>
               <p className="text-gray-700 text-sm mb-4">{item.description}</p>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
                 <span className="font-bold text-lg text-sea">
                   Rp {item.price.toLocaleString()}
                 </span>
-                <div className="flex gap-4">
-                  {/* Add to Cart */}
+                <div className="flex gap-4 justify-center sm:justify-end">
                   <div className="relative group">
                     <button
                       onClick={() => alert("Added to cart!")}
@@ -223,12 +220,10 @@ export default function Menu() {
                     >
                       <ShoppingCart size={18} />
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center whitespace-nowrap">
+                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center">
                       Add to Cart
                     </span>
                   </div>
-
-                  {/* View Details */}
                   <div className="relative group">
                     <button
                       onClick={() => setModalItem(item)}
@@ -236,7 +231,7 @@ export default function Menu() {
                     >
                       <Eye size={18} />
                     </button>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium rounded px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center whitespace-nowrap">
+                    <span className="absolute left-1/2 -translate-x-1/2 top-[115%] bg-white text-sea text-xs font-medium px-2 py-[2px] shadow group-hover:opacity-100 opacity-0 transition z-10 max-w-[100px] text-center">
                       View Details
                     </span>
                   </div>
@@ -247,11 +242,10 @@ export default function Menu() {
         ))}
       </div>
 
-      {/* Modal Box */}
       {modalItem && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center transition-opacity duration-300">
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center transition-opacity duration-300 px-4">
           <div
-            className={`bg-white rounded-xl shadow-lg w-[90%] max-w-md p-6 relative ${
+            className={`bg-white rounded-xl shadow-lg w-full max-w-md p-6 max-h-[90vh] overflow-y-auto relative ${
               isClosing ? "animate-fadeOut" : "animate-fadeInUp"
             }`}
           >
@@ -261,7 +255,7 @@ export default function Menu() {
                 setTimeout(() => {
                   setModalItem(null);
                   setIsClosing(false);
-                }, 300); // sesuai durasi fadeOut
+                }, 300);
               }}
               className="absolute top-2 right-3 text-gray-500 hover:text-sea text-xl"
             >

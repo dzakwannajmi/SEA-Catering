@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ShoppingCart, Eye } from "react-feather";
 
 const menuItems = [
   {
@@ -96,10 +97,7 @@ const menuItems = [
 export default function Menu() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = [
-    "All",
-    ...new Set(menuItems.map((item) => item.category)),
-  ];
+  const categories = ["All", ...new Set(menuItems.map((item) => item.category))];
 
   const filteredItems =
     selectedCategory === "All"
@@ -151,9 +149,20 @@ export default function Menu() {
                 <span className="font-bold text-lg text-sea">
                   Rp {item.price.toLocaleString()}
                 </span>
-                <button className="text-sm border border-sea px-3 py-1 rounded text-sea hover:bg-sea hover:text-white transition">
-                  Add to Cart
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    title="View Details"
+                    className="p-2 rounded-full bg-sea/10 hover:bg-sea/20 transition"
+                  >
+                    <Eye className="text-sea w-5 h-5" />
+                  </button>
+                  <button
+                    title="Add to Cart"
+                    className="p-2 rounded-full bg-sea/10 hover:bg-sea/20 transition"
+                  >
+                    <ShoppingCart className="text-sea w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

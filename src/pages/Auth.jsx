@@ -53,7 +53,7 @@ export default function AuthForm() {
           {/* Ini adalah 50% dari 'sliding container' (yaitu 100% dari max-w-5xl) */}
           <div className="w-1/2 flex h-full">
             {/* Login Form (Left side of THIS screen) */}
-            <div className="w-1/2 p-10 flex flex-col justify-center bg-white">
+            <div className="flex-1 p-10 flex flex-col justify-center bg-white">
               {/* Pastikan teks "Log in" terlihat penuh */}
               <h2 className="text-4xl font-bold text-center mb-8 text-gray-800 whitespace-nowrap">
                 Log in
@@ -189,7 +189,7 @@ export default function AuthForm() {
             </div>
 
             {/* Register Form Panel (Right side of THIS screen) */}
-            <div className="w-1/2 p-10 flex flex-col justify-center bg-white">
+            <div className="flex-1 p-10 flex flex-col justify-center bg-white">
               {/* Pastikan teks "Create your SEA Catering account" terlihat penuh */}
               <h2 className="text-4xl font-bold text-center mb-8 text-gray-800 whitespace-nowrap">
                 Create your SEA Catering account

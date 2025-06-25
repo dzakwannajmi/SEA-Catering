@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+import Testimonials from "./pages/Testimonials";
+// Import komponen Subscription, Contact, Testimonials dihapus dari sini
 
 export default function App() {
   return (
@@ -13,8 +15,9 @@ export default function App() {
       <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="Menu" element={<Menu />} />
-          {/* Nanti kamu tambahkan route lain di sini */}
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          {/* Route untuk Subscription, Contact, Testimonials dihapus dari sini */}
         </Routes>
       </div>
 

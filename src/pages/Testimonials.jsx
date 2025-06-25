@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Star } from "react-feather";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Select from "react-select";
 
 const MySwal = withReactContent(Swal);
 
@@ -22,13 +23,20 @@ const sampleTestimonials = [
   },
 ];
 
+const foodOptions = [
+  { value: "High Protein", label: "High Protein" },
+  { value: "Low Carb", label: "Low Carb" },
+  { value: "Vegan", label: "Vegan" },
+  { value: "Keto", label: "Keto" },
+];
+
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState(sampleTestimonials);
   const [newTestimonial, setNewTestimonial] = useState({
     name: "",
     message: "",
     rating: 0,
-    category: "",
+    category: null,
     image: null,
   });
   const [filterCategory, setFilterCategory] = useState("All");
@@ -37,10 +45,7 @@ export default function Testimonials() {
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "image") {
-      setNewTestimonial({
-        ...newTestimonial,
-        image: URL.createObjectURL(files[0]),
-      });
+      setNewTestimonial({ ...newTestimonial, image: URL.createObjectURL(files[0]) });
     } else {
       setNewTestimonial({ ...newTestimonial, [name]: value });
     }
@@ -50,16 +55,13 @@ export default function Testimonials() {
     setNewTestimonial({ ...newTestimonial, rating: index + 1 });
   };
 
+  const handleSelectChange = (selected) => {
+    setNewTestimonial({ ...newTestimonial, category: selected });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !newTestimonial.name ||
-      !newTestimonial.message ||
-      !newTestimonial.rating ||
-      !newTestimonial.category ||
-      !newTestimonial.image
-    )
-      return;
+    if (!newTestimonial.name || !newTestimonial.message || !newTestimonial.rating || !newTestimonial.category || !newTestimonial.image) return;
 
     const result = await MySwal.fire({
       title: "Submit Testimonial?",
@@ -71,23 +73,21 @@ export default function Testimonials() {
     });
 
     if (result.isConfirmed) {
-      setTestimonials([...testimonials, newTestimonial]);
-      setNewTestimonial({
-        name: "",
-        message: "",
-        rating: 0,
-        category: "",
-        image: null,
-      });
+      setTestimonials([
+        ...testimonials,
+        {
+          ...newTestimonial,
+          category: newTestimonial.category.value,
+        },
+      ]);
+      setNewTestimonial({ name: "", message: "", rating: 0, category: null, image: null });
       MySwal.fire("Submitted!", "Your testimonial has been added.", "success");
     }
   };
 
   const filteredTestimonials = testimonials.filter((t) => {
-    const categoryMatch =
-      filterCategory === "All" || t.category === filterCategory;
-    const ratingMatch =
-      filterRating === "All" || t.rating === parseInt(filterRating);
+    const categoryMatch = filterCategory === "All" || t.category === filterCategory;
+    const ratingMatch = filterRating === "All" || t.rating === parseInt(filterRating);
     return categoryMatch && ratingMatch;
   });
 
@@ -96,17 +96,10 @@ export default function Testimonials() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center text-sea mb-8">
-        Customer Testimonials
-      </h2>
+      <h2 className="text-3xl font-bold text-center text-sea mb-8">Customer Testimonials</h2>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded-xl p-6 mb-12 border"
-      >
-        <h3 className="text-xl font-semibold mb-4 text-sea">
-          Add Your Testimonial
-        </h3>
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-xl p-6 mb-12 border">
+        <h3 className="text-xl font-semibold mb-4 text-sea">Add Your Testimonial</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             type="text"
@@ -116,18 +109,14 @@ export default function Testimonials() {
             onChange={handleInputChange}
             className="border p-2 rounded w-full"
           />
-          <select
+          <Select
             name="category"
+            options={foodOptions}
             value={newTestimonial.category}
-            onChange={handleInputChange}
-            className="border p-2 rounded w-full"
-          >
-            <option value="">Select Food Type</option>
-            <option value="High Protein">High Protein</option>
-            <option value="Low Carb">Low Carb</option>
-            <option value="Vegan">Vegan</option>
-            <option value="Keto">Keto</option>
-          </select>
+            onChange={handleSelectChange}
+            placeholder="Select Food Type"
+            className="w-full"
+          />
           <textarea
             name="message"
             placeholder="Your Review"
@@ -142,9 +131,7 @@ export default function Testimonials() {
                 key={idx}
                 size={22}
                 className={`cursor-pointer ${
-                  newTestimonial.rating > idx
-                    ? "text-yellow-400 fill-yellow-400"
-                    : "text-gray-300"
+                  newTestimonial.rating > idx ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
                 }`}
                 onClick={() => handleStarClick(idx)}
               />
@@ -171,9 +158,7 @@ export default function Testimonials() {
           <button
             key={cat}
             className={`px-4 py-1 rounded-full text-sm border transition ${
-              filterCategory === cat
-                ? "bg-sea text-white border-sea"
-                : "border-sea text-sea hover:bg-sea hover:text-white"
+              filterCategory === cat ? "bg-sea text-white border-sea" : "border-sea text-sea hover:bg-sea hover:text-white"
             }`}
             onClick={() => setFilterCategory(cat)}
           >
@@ -187,15 +172,11 @@ export default function Testimonials() {
           <button
             key={rate}
             className={`px-4 py-1 rounded-full text-sm border transition ${
-              filterRating === rate.toString()
-                ? "bg-yellow-500 text-white border-yellow-500"
-                : "border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white"
+              filterRating === rate.toString() ? "bg-yellow-500 text-white border-yellow-500" : "border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white"
             }`}
             onClick={() => setFilterRating(rate.toString())}
           >
-            {rate === "All"
-              ? "All Ratings"
-              : `${rate} Star${rate > 1 ? "s" : ""}`}
+            {rate === "All" ? "All Ratings" : `${rate} Star${rate > 1 ? "s" : ""}`}
           </button>
         ))}
       </div>
@@ -218,11 +199,7 @@ export default function Testimonials() {
             <p className="text-gray-700 text-sm mb-4">{t.message}</p>
             <div className="flex items-center gap-1">
               {[...Array(t.rating)].map((_, idx) => (
-                <Star
-                  key={idx}
-                  size={18}
-                  className="text-yellow-400 fill-yellow-400"
-                />
+                <Star key={idx} size={18} className="text-yellow-400 fill-yellow-400" />
               ))}
             </div>
           </div>

@@ -1,10 +1,12 @@
 const mysql = require("mysql2");
+require("dotenv").config();
 
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "192.168.1.7", // IP dari Windows-mu (bukan 127.0.0.1)
   user: "root",
-  password: "", // ganti sesuai config kamu
-  database: "sea_catering", // pastikan DB sudah dibuat
+  password: "", // kosongkan kalau memang tidak pakai password
+  database: "sea_catering",
+  port: 3306,
 });
 
 db.connect((err) => {

@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Testimonials from "./pages/Testimonials";
+import Subscription from "./pages/Subscription";
 // Import komponen Subscription, Contact, Testimonials dihapus dari sini
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/subscription" element={<Subscription />} />
           {/* Route untuk Subscription, Contact, Testimonials dihapus dari sini */}
         </Routes>
       </div>

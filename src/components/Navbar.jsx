@@ -1,18 +1,33 @@
-// Tambahkan useEffect untuk lock scroll saat menu terbuka
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { Search, ShoppingCart, Menu as MenuIcon, X } from "react-feather";
+import { NavLink, useNavigate } from "react-router-dom";
+import {
+  Search,
+  ShoppingCart,
+  Menu as MenuIcon,
+  X,
+  LogOut,
+  UserPlus,
+  LogIn,
+} from "react-feather";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
   useEffect(() => {
-    // Disable scroll saat menu terbuka
     document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
+    setIsLoggedIn(!!localStorage.getItem("token"));
   }, [isMenuOpen]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
 
   const navItems = [
     { name: "Home", path: "/", color: "from-yellow-300 to-pink-500" },
@@ -54,13 +69,30 @@ export default function Navbar() {
       </div>
 
       {/* Right Icons */}
-      <div className="flex items-center gap-4">
-        <button className="text-white hover:text-white/80">
-          <Search size={20} />
-        </button>
-        <button className="text-white hover:text-white/80">
-          <ShoppingCart size={20} />
-        </button>
+      <div className="flex items-center gap-3">
+        <Search size={20} className="hover:opacity-80 cursor-pointer" />
+        <ShoppingCart size={20} className="hover:opacity-80 cursor-pointer" />
+
+        {/* Auth Buttons */}
+        {isLoggedIn ? (
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-1 text-sm bg-white text-sea px-3 py-1 rounded hover:bg-white/90"
+          >
+            <LogOut size={16} /> Logout
+          </button>
+        ) : (
+          <>
+            <NavLink
+              to="/auth"
+              className="flex items-center gap-1 text-sm bg-white text-sea px-3 py-1 rounded hover:bg-white/90"
+            >
+              <LogIn size={16} /> Login
+            </NavLink>
+          </>
+        )}
+
+        {/* Burger for mobile */}
         <button onClick={toggleMenu} className="md:hidden text-white ml-4">
           {isMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
         </button>
@@ -94,6 +126,24 @@ export default function Navbar() {
               {item.name}
             </NavLink>
           ))}
+          <div className="mt-4">
+            {isLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="w-full text-left text-white hover:text-yellow-300 flex items-center gap-2"
+              >
+                <LogOut size={16} /> Logout
+              </button>
+            ) : (
+              <NavLink
+                to="/auth"
+                onClick={closeMenu}
+                className="w-full text-left text-white hover:text-yellow-300 flex items-center gap-2"
+              >
+                <LogIn size={16} /> Login / Sign Up
+              </NavLink>
+            )}
+          </div>
         </div>
       </div>
 

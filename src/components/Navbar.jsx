@@ -2,7 +2,9 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav className="bg-sea text-white px-6 py-4 flex items-center justify-between">
+    // Added 'sticky', 'top-0', and 'z-50' for a fixed position on scroll
+    // 'shadow-md' is added for a subtle visual separation from content below.
+    <nav className="sticky top-0 z-50 bg-sea text-white px-6 py-4 flex items-center justify-between shadow-md">
       {/* Logo kiri */}
       <img src="/src/assets/logo2.png" alt="SEA Logo" className="h-6" />
 

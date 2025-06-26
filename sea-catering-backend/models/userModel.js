@@ -15,13 +15,9 @@ exports.saveUser = ({ full_name, email, password }) => {
 
 exports.findByEmail = (email) => {
   return new Promise((resolve, reject) => {
-    db.query(
-      "SELECT * FROM users WHERE email = ?",
-      [email],
-      (err, results) => {
-        if (err) reject(err);
-        else resolve(results[0]);
-      }
-    );
+    db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
+      if (err) reject(err);
+      else resolve(results[0]); // kalau tidak ditemukan akan return undefined
+    });
   });
 };

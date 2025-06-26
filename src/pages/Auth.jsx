@@ -15,6 +15,7 @@ export default function AuthForm() {
   const [fullName, setFullName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [keepMeSignedIn, setKeepMeSignedIn] = useState(false);
+  const [signupError, setSignupError] = useState(""); // ✅ Untuk menampilkan error signup
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +25,6 @@ export default function AuthForm() {
         password,
       });
       console.log(res.data);
-      // Simpan token/respons ke localStorage jika perlu
     } catch (err) {
       console.error("Login error:", err.response?.data || err.message);
     }
@@ -32,6 +32,7 @@ export default function AuthForm() {
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
+    setSignupError(""); // Reset error saat submit ulang
     try {
       const res = await axios.post("http://localhost:3001/api/auth/register", {
         fullName,
@@ -39,7 +40,15 @@ export default function AuthForm() {
         password,
       });
       console.log(res.data);
+      // Optional: Redirect atau otomatis login setelah signup
     } catch (err) {
+      if (err.response?.status === 409) {
+        setSignupError(
+          "Email already registered. Please use a different email."
+        );
+      } else {
+        setSignupError("Something went wrong. Please try again later.");
+      }
       console.error("Signup error:", err.response?.data || err.message);
     }
   };
@@ -54,6 +63,7 @@ export default function AuthForm() {
             transform: isLogin ? "translateX(0)" : "translateX(-50%)",
           }}
         >
+          {/* Login Panel */}
           <div className="w-1/2 flex h-full">
             <div className="flex-1 p-10 flex flex-col justify-center bg-white">
               <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
@@ -92,7 +102,10 @@ export default function AuthForm() {
                 Don&apos;t have an account?{" "}
                 <button
                   type="button"
-                  onClick={() => setIsLogin(false)}
+                  onClick={() => {
+                    setIsLogin(false);
+                    setSignupError("");
+                  }}
                   className="text-lime-700 font-semibold hover:underline"
                 >
                   Sign up
@@ -105,7 +118,10 @@ export default function AuthForm() {
                 Enter your personal details to register and start your journey.
               </p>
               <button
-                onClick={() => setIsLogin(false)}
+                onClick={() => {
+                  setIsLogin(false);
+                  setSignupError("");
+                }}
                 className="bg-white text-lime-600 font-semibold px-6 py-2 rounded-full"
               >
                 Sign Up
@@ -113,6 +129,7 @@ export default function AuthForm() {
             </div>
           </div>
 
+          {/* Sign Up Panel */}
           <div className="w-1/2 flex h-full">
             <div className="w-1/2 flex flex-col justify-center items-center bg-lime-600 text-white px-6 text-center">
               <h2 className="text-3xl font-bold mb-4">Welcome Back!</h2>
@@ -120,7 +137,10 @@ export default function AuthForm() {
                 Login with your credentials to continue your journey.
               </p>
               <button
-                onClick={() => setIsLogin(true)}
+                onClick={() => {
+                  setIsLogin(true);
+                  setSignupError("");
+                }}
                 className="bg-white text-lime-600 font-semibold px-6 py-2 rounded-full"
               >
                 Log In
@@ -163,6 +183,14 @@ export default function AuthForm() {
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </span>
                 </div>
+
+                {/* ✅ Error message muncul di sini */}
+                {signupError && (
+                  <p className="text-red-600 text-sm text-center">
+                    {signupError}
+                  </p>
+                )}
+
                 <button className="w-full bg-lime-600 text-white py-3 rounded-lg">
                   Continue
                 </button>
@@ -171,7 +199,10 @@ export default function AuthForm() {
                 Already have an account?{" "}
                 <button
                   type="button"
-                  onClick={() => setIsLogin(true)}
+                  onClick={() => {
+                    setIsLogin(true);
+                    setSignupError("");
+                  }}
                   className="text-lime-700 font-semibold hover:underline"
                 >
                   Log in

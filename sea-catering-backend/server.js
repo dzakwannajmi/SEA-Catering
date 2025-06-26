@@ -1,28 +1,35 @@
-require("dotenv").config(); // Pastikan ini baris paling atas untuk memuat variabel lingkungan
+require("dotenv").config(); // ⬅️ Muat environment variables
 const express = require("express");
 const cors = require("cors");
-// --- PENTING: Impor koneksi database Anda di sini ---
-const db = require("./db"); // Sesuaikan path jika models/db.js berada di lokasi lain
+const db = require("./db");
 
+const adminRoutes = require("./routes/adminRoutes");
 const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// 🔁 Pasang middleware global DULUAN
-app.use(cors());
-app.use(express.json()); // Penting untuk body parser
+// ✅ Aktifkan CORS lebih awal
+app.use(cors({
+  origin: "http://localhost:5173", // ⬅️ Ganti sesuai URL frontend kamu
+  credentials: true, // opsional kalau kamu pakai cookie
+}));
 
-// 🔁 Baru pasang routes
+// ✅ Middleware penting lainnya
+app.use(express.json());
+
+// ✅ Pasang semua route setelah middleware
 app.use("/api/auth", authRoutes);
-app.use("/api", subscriptionRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/subscriptions", subscriptionRoutes);
 
-// Tes endpoint
+// ✅ Endpoint test
 app.get("/", (req, res) => {
   res.send("SEA Catering Backend Running!");
 });
 
+// ✅ Jalankan server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

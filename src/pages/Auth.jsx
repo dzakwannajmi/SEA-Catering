@@ -7,8 +7,10 @@ import {
   FaFacebookF,
 } from "react-icons/fa";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthForm() {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +26,12 @@ export default function AuthForm() {
         email,
         password,
       });
-      console.log(res.data);
+
+      const { token } = res.data;
+      localStorage.setItem("token", token); // Simpan token
+      console.log("Login success:", res.data);
+
+      navigate("/userdashboard"); // Arahkan ke dashboard
     } catch (err) {
       console.error("Login error:", err.response?.data || err.message);
     }

@@ -1,5 +1,6 @@
-
 # SEA Catering – Smart Meal Subscription App 🍱
+
+![Image](https://github.com/user-attachments/assets/00a3813c-f8dd-4b1e-9580-0e626ea27137)
 
 **SEA Catering** is a full-stack web application designed to simplify healthy meal subscription services for users. It allows users to register, log in, choose meal plans (such as Diet, Protein, or Royal Plans), customize delivery days and meal types, and subscribe with just a few clicks.
 

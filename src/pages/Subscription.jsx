@@ -87,8 +87,8 @@ export default function Subscription() {
 
     if (result.isConfirmed) {
       try {
-        const token = localStorage.getItem("token"); // ✅ Deklarasikan dulu
-        console.log("TOKEN:", token); // ✅ Lalu dipakai
+        const token = localStorage.getItem("token");
+        console.log("TOKEN:", token);
 
         const res = await fetch(
           "http://localhost:3001/api/subscriptions/subscribe",

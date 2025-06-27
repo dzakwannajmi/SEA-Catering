@@ -1,6 +1,18 @@
 import React, { useState } from "react";
 import { ShoppingCart, Eye } from "react-feather";
 
+import img1 from "../images/m1.jpg";
+import img2 from "../images/m2.jpg";
+import img3 from "../images/m3.jpg";
+import img4 from "../images/m4.jpg";
+import img5 from "../images/m5.jpg";
+import img6 from "../images/m6.jpg";
+import img7 from "../images/m7.jpg";
+import img8 from "../images/m8.jpg";
+import img9 from "../images/m9.jpg";
+import img10 from "../images/m10.jpg";
+
+
 const menuItems = [
   {
     id: 1,
@@ -8,7 +20,7 @@ const menuItems = [
     description:
       "High-protein grilled chicken breast served with quinoa and steamed broccoli.",
     price: 55000,
-    image: "/images/grilled-chicken.jpg",
+    image: img1,
     category: "High Protein",
     nutrition: {
       calories: 420,
@@ -53,7 +65,7 @@ const menuItems = [
     description:
       "Fresh salmon slices, avocado, and mixed greens with lemon vinaigrette.",
     price: 60000,
-    image: "/images/salmon-salad.jpg",
+    image: img2,
     category: "Low Carb",
     nutrition: {
       calories: 390,
@@ -95,7 +107,7 @@ const menuItems = [
     description:
       "Chickpeas, sweet potatoes, kale, and brown rice with tahini dressing.",
     price: 50000,
-    image: "/images/buddha-bowl.jpg",
+      image: img3,
     category: "Vegan",
     nutrition: {
       calories: 450,
@@ -140,7 +152,7 @@ const menuItems = [
     description:
       "Healthy oats soaked overnight with almond milk, topped with fresh berries.",
     price: 40000,
-    image: "/images/overnight-oats.jpg",
+    image: img4,
     category: "Breakfast",
     nutrition: {
       calories: 350,
@@ -173,7 +185,7 @@ const menuItems = [
     description:
       "Stir-fried tofu with vegetables and low-sodium soy sauce over brown rice.",
     price: 48000,
-    image: "/images/tofu-stir-fry.jpg",
+    image: img5,
     category: "Vegan",
     nutrition: {
       calories: 400,
@@ -215,7 +227,7 @@ const menuItems = [
     description:
       "Lean beef slices cooked in teriyaki sauce with steamed veggies and rice.",
     price: 59000,
-    image: "/images/beef-teriyaki.jpg",
+    image: img6,
     category: "High Protein",
     nutrition: {
       calories: 470,
@@ -255,7 +267,7 @@ const menuItems = [
     description:
       "Spinach, banana, green apple, and chia blended into a nutritious smoothie.",
     price: 35000,
-    image: "/images/green-smoothie.jpg",
+    image: img7,
     category: "Drink",
     nutrition: {
       calories: 220,
@@ -284,7 +296,7 @@ const menuItems = [
     description:
       "Fresh shrimp, edamame, mango, and rice topped with sesame ginger dressing.",
     price: 62000,
-    image: "/images/shrimp-poke.jpg",
+    image: img8,
     category: "Low Carb",
     nutrition: {
       calories: 410,
@@ -324,7 +336,7 @@ const menuItems = [
     description:
       "Whole grain wrap with lean turkey, avocado, lettuce, and hummus.",
     price: 52000,
-    image: "/images/turkey-wrap.jpg",
+    image: img9,
     category: "Snack",
     nutrition: {
       calories: 380,
@@ -355,7 +367,7 @@ const menuItems = [
     description:
       "Layers of Greek yogurt, granola, and mixed berries — a perfect breakfast.",
     price: 42000,
-    image: "/images/yogurt-parfait.jpg",
+    image: img10,
     category: "Breakfast",
     nutrition: {
       calories: 300,

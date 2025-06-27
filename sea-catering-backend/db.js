@@ -1,7 +1,8 @@
-const mysql = require("mysql2");
-require("dotenv").config(); // Pastikan ini di baris pertama, kecuali ada import lain yang lebih tinggi.
+const mysql = require("mysql2/promise"); // ✅ gunakan versi promise
+require("dotenv").config();
 
-const db = mysql.createConnection({
+// Buat pool koneksi (disarankan untuk skala aplikasi)
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -9,12 +10,15 @@ const db = mysql.createConnection({
   port: process.env.DB_PORT || 3306,
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error("Failed to connect to MySQL:", err); // Pesan error yang lebih detail
-  } else {
+// Cek koneksi database saat server mulai
+(async () => {
+  try {
+    const conn = await db.getConnection(); // ✅ ini hanya tersedia di versi promise
     console.log("MySQL Connected");
+    conn.release(); // Jangan lupa release connection
+  } catch (error) {
+    console.error("Failed to connect to MySQL:", error);
   }
-});
+})();
 
 module.exports = db;

@@ -37,7 +37,7 @@ export default function Navbar() {
       path: "/subscription",
       color: "from-indigo-300 to-purple-600",
     },
-    { name: "Contact", path: "/contact", color: "from-sky-300 to-cyan-500" },
+    { name: "Contact", path: "/Contact", color: "from-sky-300 to-cyan-500" },
     {
       name: "Testimonials",
       path: "/testimonials",

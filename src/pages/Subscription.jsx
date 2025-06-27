@@ -54,76 +54,86 @@ export default function Subscription() {
     return price;
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (
-    !form.name ||
-    !form.phone ||
-    !form.plan ||
-    form.meals.length === 0 ||
-    form.days.length === 0
-  ) {
-    Swal.fire("Oops!", "Please fill all required fields.", "warning");
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const total = calculateTotal();
-
-  const result = await Swal.fire({
-    title: "Confirm Subscription",
-    html: `Name: <strong>${form.name}</strong><br>
-          Phone: <strong>${form.phone}</strong><br>
-          Plan: <strong>${form.plan}</strong><br>
-          Meals: <strong>${form.meals.join(", ")}</strong><br>
-          Days: <strong>${form.days.join(", ")}</strong><br>
-          Allergies: <strong>${form.allergies || "None"}</strong><br>
-          <br>Total Price: <strong>Rp${total.toLocaleString()}</strong>`,
-    icon: "info",
-    showCancelButton: true,
-    confirmButtonText: "Confirm",
-    cancelButtonText: "Cancel",
-  });
-
-  if (result.isConfirmed) {
-    try {
-      const res = await fetch("http://localhost:3001/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: form.name,
-          phone: form.phone,
-          plan: form.plan,
-          meals: form.meals,
-          days: form.days,
-          allergies: form.allergies,
-          totalPrice: total,
-        }),
-      });
-
-      if (!res.ok) throw new Error("Failed to save subscription.");
-
-      const data = await res.json();
-
-      Swal.fire("Submitted!", "Your subscription has been saved.", "success");
-
-      // Reset form setelah sukses
-      setForm({
-        name: "",
-        phone: "",
-        plan: "",
-        meals: [],
-        days: [],
-        allergies: "",
-      });
-    } catch (err) {
-      console.error(err);
-      Swal.fire("Error", "There was a problem submitting your subscription.", "error");
+    if (
+      !form.name ||
+      !form.phone ||
+      !form.plan ||
+      form.meals.length === 0 ||
+      form.days.length === 0
+    ) {
+      Swal.fire("Oops!", "Please fill all required fields.", "warning");
+      return;
     }
-  }
-};
 
+    const total = calculateTotal();
+
+    const result = await Swal.fire({
+      title: "Confirm Subscription",
+      html: `Name: <strong>${form.name}</strong><br>
+            Phone: <strong>${form.phone}</strong><br>
+            Plan: <strong>${form.plan}</strong><br>
+            Meals: <strong>${form.meals.join(", ")}</strong><br>
+            Days: <strong>${form.days.join(", ")}</strong><br>
+            Allergies: <strong>${form.allergies || "None"}</strong><br>
+            <br>Total Price: <strong>Rp${total.toLocaleString()}</strong>`,
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "Confirm",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const token = localStorage.getItem("token"); // ✅ Deklarasikan dulu
+        console.log("TOKEN:", token); // ✅ Lalu dipakai
+
+        const res = await fetch(
+          "http://localhost:3001/api/subscriptions/subscribe",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              name: form.name,
+              phone: form.phone,
+              plan: form.plan,
+              meals: form.meals,
+              days: form.days,
+              allergies: form.allergies,
+              totalPrice: total,
+            }),
+          }
+        );
+
+        if (!res.ok) throw new Error("Failed to save subscription.");
+
+        await res.json();
+
+        Swal.fire("Submitted!", "Your subscription has been saved.", "success");
+
+        setForm({
+          name: "",
+          phone: "",
+          plan: "",
+          meals: [],
+          days: [],
+          allergies: "",
+        });
+      } catch (err) {
+        console.error(err);
+        Swal.fire(
+          "Error",
+          "There was a problem submitting your subscription.",
+          "error"
+        );
+      }
+    }
+  };
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">

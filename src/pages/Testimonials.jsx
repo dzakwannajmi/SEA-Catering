@@ -4,6 +4,9 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Select from "react-select";
 
+import img1 from "../images/m1.jpg";
+import img2 from "../images/m2.jpg";
+
 const MySwal = withReactContent(Swal);
 
 const sampleTestimonials = [
@@ -12,14 +15,133 @@ const sampleTestimonials = [
     message: "This is the best healthy food I've ever tried!",
     rating: 5,
     category: "High Protein",
-    image: "https://source.unsplash.com/200x150/?healthy-food",
+    image: img1,
   },
   {
     name: "Jane Smith",
     message: "Delicious and guilt-free!",
     rating: 4,
     category: "Low Carb",
-    image: "https://source.unsplash.com/200x150/?salad",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
+  },
+  {
+    name: "Jane Smith",
+    message: "Delicious and guilt-free!",
+    rating: 4,
+    category: "Low Carb",
+    image: img2,
   },
 ];
 
@@ -214,11 +336,11 @@ export default function Testimonials() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {filteredTestimonials.map((t, i) => (
           <div
             key={i}
-            className="bg-white p-6 rounded-xl shadow border hover:shadow-md transition"
+            className="w-full max-w-[300px] min-h-[420px] bg-white p-6 rounded-xl shadow border hover:shadow-md transition mx-auto flex flex-col"
           >
             {t.image && (
               <img
@@ -228,9 +350,9 @@ export default function Testimonials() {
               />
             )}
             <h4 className="font-bold text-sea text-lg mb-1">{t.name}</h4>
-            <p className="text-gray-600 text-sm mb-3 italic">{t.category}</p>
-            <p className="text-gray-700 text-sm mb-4">{t.message}</p>
-            <div className="flex items-center gap-1">
+            <p className="text-gray-600 text-sm italic mb-2">{t.category}</p>
+            <p className="text-gray-700 text-sm flex-grow mb-4">{t.message}</p>
+            <div className="flex items-center gap-1 mt-auto">
               {[...Array(t.rating)].map((_, idx) => (
                 <Star
                   key={idx}

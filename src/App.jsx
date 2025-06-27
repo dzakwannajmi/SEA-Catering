@@ -8,8 +8,9 @@ import Subscription from "./pages/Subscription";
 import Auth from "./pages/Auth";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserDashboard from "./pages/UserDashboard";
-import AdminDashboard from "./pages/AdminDashboard";
 import Unauthorized from "./pages/Unauthorized"; // ⛔️ Tambahkan jika belum ada
+import AdminDashboard from "./pages/AdminDashboard";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/contact" element={<Contact />} />
 
           {/* ⛔️ Halaman jika akses ditolak */}
           <Route path="/unauthorized" element={<Unauthorized />} />

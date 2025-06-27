@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-import img1 from "../assets/logo2.png";
-import img2 from "../assets/logo2.png";
-import img3 from "../assets/logo2.png";
-import img4 from "../assets/logo2.png";
-import img5 from "../assets/logo2.png";
-import img6 from "../assets/logo2.png";
+import img1 from "../images/m1.jpg";
+import img2 from "../images/m2.jpg";
+import img3 from "../images/m3.jpg";
+import img4 from "../images/m4.jpg";
+import img5 from "../images/m5.jpg";
+import img6 from "../images/m6.jpg";
 
 const images = [img1, img2, img3, img4, img5, img6 /* dan seterusnya */];
 

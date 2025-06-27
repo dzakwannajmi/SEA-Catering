@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { verifyToken } = require("../middlewares/authMiddleware");
+const verifyToken = require("../middlewares/authMiddleware");
 const {
   pauseSubscription,
   cancelSubscription,
   getUserSubscriptions,
+  createSubscription,
 } = require("../controllers/subscriptionController");
 const db = require("../db");
 
@@ -15,6 +16,8 @@ router.put("/pause/:id", verifyToken, pauseSubscription);
 
 // Route: Cancel subscription by ID
 router.put("/cancel/:id", verifyToken, cancelSubscription);
+
+router.post("/subscribe", verifyToken, createSubscription);
 
 // Route: Get subscriptions for current logged-in user
 router.get("/user/subscriptions", verifyToken, async (req, res) => {

@@ -117,9 +117,8 @@ The frontend will run on [http://localhost:5173](http://localhost:5173)
 - **Name:** Muhammad Dzakwan Najmi  
 - **University:** Universitas Islam Kalimantan Selatan  
 - **Faculty:** Faculty of Information Technology  
-- **Program:** Informatics Engineering  
-- **Role:** Full-Stack Developer  
-- **IDE:** Visual Studio Code  
+- **Program:** Informatics Engineering
+- **IDE:** Visual Studio Code, Laragon (MySql)
 - **Main Language:** JavaScript (Node.js + React)
 
 ---

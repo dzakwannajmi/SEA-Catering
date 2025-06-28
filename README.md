@@ -99,30 +99,12 @@ node server.js
 cd sea-catering-frontend
 npm install
 npm run dev
-```
-
-The frontend will run on [http://localhost:5173](http://localhost:5173)
-
----
 
 ## 🔒 Security & Authentication
 
 - JWT tokens are issued after login and stored in `localStorage`
 - All protected API routes use `Authorization: Bearer <token>` headers
 - The backend checks token validity via middleware before accessing protected resources
-
----
-
-## 📚 Developer Information
-
-- **Name:** Muhammad Dzakwan Najmi  
-- **University:** Universitas Islam Kalimantan Selatan  
-- **Faculty:** Faculty of Information Technology  
-- **Program:** Informatics Engineering
-- **IDE:** Visual Studio Code, Laragon (MySql)
-- **Main Language:** JavaScript (Node.js + React)
-
----
 
 ## ✅ Final Notes
 

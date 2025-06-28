@@ -8,7 +8,7 @@ import Subscription from "./pages/Subscription";
 import Auth from "./pages/Auth";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserDashboard from "./pages/UserDashboard";
-import Unauthorized from "./pages/Unauthorized"; // ⛔️ Tambahkan jika belum ada
+import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/AdminDashboard";
 import Contact from "./pages/Contact";
 
